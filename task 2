@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список користувачів</title>
+</head>
+<body>
+    <h2>Список користувачів старше 18 років</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Ім'я</th>
+                <th>Вік</th>
+            </tr>
+        </thead>
+        <tbody id="userTable">
+        </tbody>
+    </table>
+
+    <script>
+        function displayUsers(existingUsers, ...newUsers) {
+            const allUsers = [...existingUsers, ...newUsers];
+            const filteredUsers = allUsers.filter(user => user.age > 18);
+            const tableBody = document.getElementById('userTable');
+            tableBody.innerHTML = ''; 
+            
+            filteredUsers.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.name}</td>
+                    <td>${user.age}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+        const existingUsers = [
+            { name: 'Олексій', age: 24 },
+            { name: 'Анна', age: 17 },
+            { name: 'Марія', age: 20 },
+        ];
+        const newUsers = [
+            { name: 'Іван', age: 22 },
+            { name: 'Ольга', age: 16 },
+            { name: 'Петро', age: 19 },
+        ];
+        displayUsers(existingUsers, ...newUsers);
+    </script>
+</body>
+</html>
